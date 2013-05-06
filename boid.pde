@@ -30,6 +30,7 @@ class Boid {
   float mass;
   float radius;
   boolean selected;
+  int flapFrame;
   
   Boid(Flock flock, float x, float y) {
     this.flock = flock;
@@ -43,20 +44,27 @@ class Boid {
     this.alignmentThrust = new PVector(0, 0);
     this.thrust = new PVector(0, 0);
     this.mass = 1;
-    this.radius = 5.0;
+    this.radius = 30.0;
     this.selected = false;
+    this.flapFrame = (int)random(0, 16);
   }
   
   void draw() {
     this.drawKeyThrust();
     stroke(0);
     strokeWeight(1);
-    ellipse(this.position.x, this.position.y, 2.0 * this.radius, 2.0 * this.radius);
-    
+    pushMatrix();
     PVector v = this.velocity.get();
     v.normalize();
     v.mult(5);
-    line(this.position.x, this.position.y, this.position.x + v.x, this.position.y + v.y);
+    translate(this.position.x, this.position.y);
+    rotate(this.velocity.heading());
+    line(0, 3 * sin(norm(frameCount + flapFrame % 16, 0, 16) * PI), 5, 0);
+    line(0, -3 * sin(norm(frameCount + flapFrame % 16, 0, 16) * PI), 5, 0);
+//    line(0, -2, 5, 0);
+//    line(0, 2, 5, 0);
+//    line(0, 0, 5, 0);
+    popMatrix();
   }
   
   void drawThrustVector(PVector v, color c) {

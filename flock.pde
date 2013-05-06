@@ -5,12 +5,12 @@ class Flock {
     this.boids = new ArrayList<Boid>();
   }
   
-  void addBoid(float x, float y) {
-    Boid boid = new Boid(this, x, y);
+  void addBoid(Boid boid) {
     if (this.boids.size() == 0) {
       // boid.selected = true;
     }
     this.boids.add(boid);
+    println(this.boids.size());
   }
   
   void update() {
