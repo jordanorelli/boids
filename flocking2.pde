@@ -5,12 +5,14 @@ void setup() {
   size(500, 500);
   keyState = new HashMap();
   flock = new Flock();  
-  float n = 8.0;
+  float n = 180.0;
   float t = TWO_PI / n;
-  float flockWidth = 30.0;
+  float flockWidth = 100.0;
   for (int i = 0; i < n; i++) {
     float x = width * 0.5 + flockWidth * cos(float(i) * t);
     float y = height * 0.5 + flockWidth * sin(float(i) * t);
+    x = random(20, width - 20);
+    y = random(20, height - 20);
     flock.addBoid(x, y);
   }
 }

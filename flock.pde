@@ -8,7 +8,7 @@ class Flock {
   void addBoid(float x, float y) {
     Boid boid = new Boid(this, x, y);
     if (this.boids.size() == 0) {
-      boid.selected = true;
+      // boid.selected = true;
     }
     this.boids.add(boid);
   }
@@ -24,13 +24,17 @@ class Flock {
   
   void keyPressed(int code) {
     for (Boid boid : this.boids) {
-      boid.keyPressed(code);
+      if (boid.selected) {
+        boid.keyPressed(code);
+      }
     }
   }
   
   void keyReleased(int code) {
     for (Boid boid : this.boids) {
-      boid.keyReleased(code);
+      if (boid.selected) {
+        boid.keyReleased(code);
+      }
     }
   }
 }
